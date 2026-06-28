@@ -1,0 +1,23 @@
+.DS_Store
+Thumbs.db
+
+# Python and tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local Codex and agent outputs
+work/
+outputs/
+.codex/
+.agents/
+.specify/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log

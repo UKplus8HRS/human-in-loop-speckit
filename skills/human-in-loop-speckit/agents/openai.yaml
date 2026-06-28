@@ -1,0 +1,4 @@
+interface:
+  display_name: "Human-in-loop Speckit"
+  short_description: "Collaborative Spec Kit planning with user review gates."
+  default_prompt: "Use $human-in-loop-speckit to interview me, draft Markdown artifacts, and wait for confirmation before execution."
