@@ -1,4 +1,6 @@
-# Human-in-loop Speckit
+# Human-in-loop Speckit 🧭
+
+Languages: **English** | [简体中文](README.zh-CN.md)
 
 Human-in-loop Speckit is a Codex skill for collaborative, review-gated Spec Kit style planning.
 
@@ -6,7 +8,7 @@ It is for people who do not want an AI coding agent to turn one vague prompt int
 
 This project is inspired by GitHub Spec Kit and harness engineering patterns, but it is not a fork of Spec Kit and does not modify upstream Spec Kit.
 
-## Why this exists
+## Why this exists ✨
 
 AI coding agents are strongest when the goal, boundaries, and verification evidence are explicit. They are weakest when they have to infer all of those from a vague instruction.
 
@@ -26,7 +28,7 @@ Unapproved Markdown is a draft.
 Drafts are not execution authority.
 ```
 
-## What it produces
+## What it produces 📄
 
 The skill guides Codex through a small artifact set:
 
@@ -41,7 +43,7 @@ The skill guides Codex through a small artifact set:
 
 If the repository is already a Spec Kit project, the skill aligns with `specs/<feature>/spec.md`, `plan.md`, and `tasks.md`. Otherwise it creates a lightweight task folder such as `work/harness/<short-slug>/`.
 
-## How it differs from Spec Kit
+## How it differs from Spec Kit 🔍
 
 Spec Kit is a full spec-driven development toolkit. It can bootstrap a project, create standard specs, plans, tasks, and agent integrations.
 
@@ -57,7 +59,7 @@ Human-in-loop Speckit is a smaller wrapper skill focused on conversation and app
 
 Use Spec Kit when you want the full toolkit. Use this skill when the requirements are still fuzzy and the human needs to stay in the loop.
 
-## Installation
+## Installation 🚀
 
 Clone this repository and copy the skill directory into your Codex skills folder:
 
@@ -76,7 +78,7 @@ The installed skill path should look like:
 %USERPROFILE%\.codex\skills\human-in-loop-speckit\references\artifact-contract.md
 ```
 
-## Optional: install GitHub Spec Kit
+## Optional: install GitHub Spec Kit 🛠️
 
 This skill can work without the Spec Kit CLI. If you also want the upstream Spec Kit CLI, install `uv` and `specify-cli`:
 
@@ -100,7 +102,7 @@ specify init --here --force --integration codex --integration-options="--skills"
 
 Depending on the Spec Kit version and integration, generated skills may be placed under `.agents/skills`.
 
-## Usage
+## Usage 💬
 
 Invoke the skill in Codex:
 
@@ -122,7 +124,7 @@ Questions:
 
 After the human answers, Codex drafts the artifact, asks for edits or approval, and only writes it after confirmation.
 
-## Example workflow
+## Example workflow 🧪
 
 ```text
 Human: I want a harness for building a small app with Codex.
@@ -147,7 +149,7 @@ Remaining: <next artifact or decision>
 Blocked: <only if blocked, with exact missing input>
 ```
 
-## Artifact status model
+## Artifact status model ✅
 
 Each generated artifact should start with:
 
@@ -167,7 +169,7 @@ Allowed status values:
 - `executing`: implementation is in progress.
 - `verified`: required evidence has been collected.
 
-## Repository layout
+## Repository layout 🗂️
 
 ```text
 .
@@ -182,7 +184,7 @@ Allowed status values:
 |           `-- artifact-contract.md
 ```
 
-## Validation
+## Validation 🔎
 
 If you have the Codex system `skill-creator` skill available locally, validate the skill folder:
 
@@ -196,7 +198,7 @@ Expected result:
 Skill is valid!
 ```
 
-## Design principles
+## Design principles 🧩
 
 - Ask before guessing when a decision changes scope or architecture.
 - Keep changes surgical and tied to approved artifacts.
@@ -206,13 +208,13 @@ Skill is valid!
 - Surface conflicts instead of blending incompatible patterns.
 - Keep the human in control of approval gates.
 
-## Relationship to upstream projects
+## Relationship to upstream projects 🤝
 
 - GitHub Spec Kit: https://github.com/github/spec-kit
 - Claude Code Superpowers: used as an optional downstream dispatch model, not bundled here.
 
 This repository is independent and is not affiliated with GitHub, OpenAI, or the upstream Spec Kit project.
 
-## License
+## License 📜
 
 MIT. See `LICENSE`.
