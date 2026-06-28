@@ -6,7 +6,10 @@ Human-in-loop Speckit is a Codex skill for collaborative, review-gated Spec Kit 
 
 It is for people who do not want an AI coding agent to turn one vague prompt into a full implementation plan and start editing files immediately. Instead, the skill makes Codex act as an interviewer and editor first: it asks focused questions, expands rough answers into Markdown artifacts, waits for human confirmation, and only then uses those approved artifacts as execution authority.
 
-This project is inspired by GitHub Spec Kit and harness engineering patterns, but it is not a fork of Spec Kit and does not modify upstream Spec Kit.
+This project is inspired by GitHub Spec Kit and harness engineering patterns, but it is not a fork of Spec Kit and does not modify upstream Spec Kit. It now supports two workflow depths:
+
+- **Basic mode**: smaller harness for quick, low-risk work.
+- **Full mode**: closer to Spec Kit parity, including constitution, clarification, research, data model, contracts, quickstart, checklists, analysis, verification, handoff, and convergence.
 
 ## Why this exists ✨
 
@@ -28,9 +31,25 @@ Unapproved Markdown is a draft.
 Drafts are not execution authority.
 ```
 
+## Workflow depth ⚙️
+
+Use `basic` only when the task is small and the user explicitly wants speed.
+
+Use `full` for normal feature work, multi-agent work, unclear requirements, or anything that needs strong verification. Full mode follows this shape:
+
+```text
+constitution -> goal -> spec -> clarify -> plan -> research
+-> data-model/contracts/quickstart -> tasks -> checklist
+-> analysis -> verification -> handoff -> implement -> converge
+```
+
+If the repo is already a native Spec Kit project, use the upstream `speckit-*` skills directly where appropriate and use this skill as the human approval layer around them.
+
 ## What it produces 📄
 
-The skill guides Codex through a small artifact set:
+The skill guides Codex through either the basic set or the full Spec Kit-style set.
+
+Basic mode:
 
 | Artifact | Purpose |
 | --- | --- |
@@ -41,23 +60,38 @@ The skill guides Codex through a small artifact set:
 | `verification.md` | Automated checks, manual checks, evidence to report, and cannot-claim-done rules |
 | `handoff.md` | Approved inputs and boundaries for Codex, Superpowers, or subagents |
 
+Full mode adds:
+
+| Artifact | Purpose |
+| --- | --- |
+| `constitution.md` | Principles, governance, and non-negotiable project rules |
+| `clarifications.md` | Up to 5 high-impact questions integrated back into the spec |
+| `research.md` | Decisions, rationales, and alternatives for unknowns and dependencies |
+| `data-model.md` | Entities, fields, relationships, lifecycles, and validation rules |
+| `contracts/` | API, CLI, event, parser, UI, or integration contracts |
+| `quickstart.md` | End-to-end validation scenarios and expected outcomes |
+| `checklists/requirements.md` | Requirements quality checklist |
+| `analysis.md` | Read-only consistency and coverage report |
+| `convergence.md` | Post-implementation gap assessment and remaining work |
+
 If the repository is already a Spec Kit project, the skill aligns with `specs/<feature>/spec.md`, `plan.md`, and `tasks.md`. Otherwise it creates a lightweight task folder such as `work/harness/<short-slug>/`.
 
 ## How it differs from Spec Kit 🔍
 
 Spec Kit is a full spec-driven development toolkit. It can bootstrap a project, create standard specs, plans, tasks, and agent integrations.
 
-Human-in-loop Speckit is a smaller wrapper skill focused on conversation and approval gates:
+Human-in-loop Speckit is a human-controlled wrapper around the same lifecycle shape:
 
 | Area | Spec Kit | Human-in-loop Speckit |
 | --- | --- | --- |
 | Primary mode | Structured commands and generated artifacts | Interview, draft, confirm, then write |
 | Human role | Provide requirements and prompts | Co-edit every artifact before execution |
-| Execution gate | Plan and tasks drive implementation | Approved `tasks.md` and `verification.md` are required |
-| Verification | Checklists and analyze workflows | Explicit evidence and cannot-claim-done rules |
+| Lifecycle depth | Constitution, clarify, plan, tasks, analyze, implement, converge | Same concepts with explicit human approval gates |
+| Execution gate | Plan and tasks drive implementation | Approved tasks, verification, analysis, and handoff are required |
+| Verification | Checklists and analyze workflows | Checklists, analysis, evidence, cannot-claim-done rules, convergence |
 | Subagents | Can be used through agent tooling | Dispatch only after approved handoff |
 
-Use Spec Kit when you want the full toolkit. Use this skill when the requirements are still fuzzy and the human needs to stay in the loop.
+Use Spec Kit when you want the native toolkit. Use this skill when you want the same level of structure but with the human explicitly co-editing and approving each gate.
 
 ## Installation 🚀
 
@@ -108,6 +142,12 @@ Invoke the skill in Codex:
 
 ```text
 $human-in-loop-speckit Help me turn this rough idea into goal/spec/plan/tasks/verification. Ask me questions first and do not implement until I approve the artifacts.
+```
+
+For full mode:
+
+```text
+$human-in-loop-speckit Use full mode. Walk me through constitution, spec, clarification, plan, research, tasks, checklist, analysis, verification, and handoff before implementation.
 ```
 
 Codex should then work in short loops:
@@ -181,7 +221,8 @@ Allowed status values:
 |       |-- agents/
 |       |   `-- openai.yaml
 |       `-- references/
-|           `-- artifact-contract.md
+|           |-- artifact-contract.md
+|           `-- speckit-parity.md
 ```
 
 ## Validation 🔎

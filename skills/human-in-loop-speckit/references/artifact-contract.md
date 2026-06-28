@@ -33,6 +33,19 @@ Required sections:
 - `## Assumptions`
 - `## Open Questions`
 
+## constitution.md
+
+Required sections:
+
+- `# Constitution`
+- `## Principles`
+- `## Governance`
+- `## Versioning`
+- `## Compliance Review`
+- `## Sync Impact Report`
+
+Principles should be testable and use MUST/SHOULD intentionally. If this is a native Spec Kit project, use `.specify/memory/constitution.md` instead of a separate local file.
+
 ## spec.md
 
 Required sections:
@@ -46,11 +59,25 @@ Required sections:
 - `## Acceptance Criteria`
 - `## Open Questions`
 
+## clarifications.md
+
+Required sections:
+
+- `# Clarifications`
+- `## Coverage Map`
+- `## Questions Asked`
+- `## Integrated Answers`
+- `## Deferred Questions`
+
+Ask no more than 5 high-impact questions per pass. Each answer must be integrated back into `spec.md`, not only stored here.
+
 ## plan.md
 
 Required sections:
 
 - `# Implementation Plan`
+- `## Technical Context`
+- `## Constitution Check`
 - `## Existing Reuse`
 - `## Proposed Approach`
 - `## Files and Boundaries`
@@ -59,6 +86,57 @@ Required sections:
 - `## Decisions Needing Approval`
 
 Before drafting `plan.md`, read the relevant exports, callers, shared utilities, scripts, and tests.
+
+## research.md
+
+Required sections:
+
+- `# Research`
+- `## Unknowns Resolved`
+- `## Decisions`
+- `## Alternatives Considered`
+- `## Open Technical Risks`
+
+Each decision should state `Decision`, `Rationale`, and `Alternatives considered`.
+
+## data-model.md
+
+Required sections:
+
+- `# Data Model`
+- `## Entities`
+- `## Fields`
+- `## Relationships`
+- `## Lifecycle and State`
+- `## Validation Rules`
+
+Mark `Not applicable` with rationale when the feature has no durable data model.
+
+## contracts/
+
+Use this folder for public or internal interfaces that affect implementation or tests:
+
+- API endpoints
+- CLI commands
+- event schemas
+- parser grammars
+- UI interaction contracts
+- external integration payloads
+
+If there are no contracts, record that in `plan.md` or `research.md` with rationale.
+
+## quickstart.md
+
+Required sections:
+
+- `# Quickstart`
+- `## Prerequisites`
+- `## Setup`
+- `## Scenarios`
+- `## Expected Outcomes`
+- `## Troubleshooting`
+
+This is a validation/run guide, not an implementation guide.
 
 ## tasks.md
 
@@ -77,6 +155,34 @@ Required sections:
 - `## Checkpoints`
 
 Use `[P]` only when tasks touch different files or have no unresolved dependency.
+
+## checklists/requirements.md
+
+Required sections:
+
+- `# Requirements Checklist`
+- `## Completeness`
+- `## Clarity`
+- `## Consistency`
+- `## Measurability`
+- `## Edge Cases`
+- `## Non-Functional Requirements`
+
+Checklist items test the quality of the requirements, not whether the implementation works.
+
+## analysis.md
+
+Required sections:
+
+- `# Specification Analysis Report`
+- `## Findings`
+- `## Coverage Summary`
+- `## Constitution Alignment`
+- `## Unmapped Tasks`
+- `## Metrics`
+- `## Recommended Next Actions`
+
+This report is read-only. Do not modify artifacts while generating it.
 
 ## verification.md
 
@@ -104,3 +210,17 @@ Required sections:
 - `## Stop Conditions`
 
 Use this file only after `tasks.md` and `verification.md` are approved.
+
+## convergence.md
+
+Required sections:
+
+- `# Convergence`
+- `## Intent Inventory`
+- `## Codebase Assessment`
+- `## Remaining Work`
+- `## Appended Tasks`
+- `## Converged Items`
+- `## Follow-up Recommendation`
+
+Convergence happens after implementation. It compares current code to approved spec, plan, tasks, and verification expectations.
